@@ -1,7 +1,8 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin;export PATH
 function add_to_path() {
-	local value=$*
+	local values=$*
 	local newpath=:
+
 	values=$(echo ${values}|sed 's/\:/ /g')
 	for value in ${values};do
 		if [ -d ${value} ] ; then
