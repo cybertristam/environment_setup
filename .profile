@@ -29,7 +29,7 @@ function source_functions() {
 	for function in ${functions};do
 		if [ -s ${function} ] ; then
 			. ${function}
-		done
+		fi
 	done
 }
 
@@ -46,7 +46,7 @@ UMASK="077";export UMASK
 source_functions ${HOME}/.aliases
 
 if [ -x /bin/docker ] && [ -s ${HOME}/.docker_aliases ] ; then
-	if "$(systemctl is-active docker) = "active" ]; then
+	if "$(systemctl is-active docker)" = "active" ]; then
 		source_functions ${HOME}/.docker_aliases
 		source_functions ${HOME}/.docker_functions
 	fi
