@@ -20,7 +20,7 @@ function set_env_var_dirs() {
 		key=$(echo ${values}|awk -F= '{print $1}')
 		value_pair=$(echo ${values}|awk -F= '{print $2}')
 		if [ -d ${value_pair} ] || [ -L ${value_pair} ] ; then
-			export ${key}=${value_pair}
+			${key}=${value_pair};export ${key}
 		fi
 	done
 }
