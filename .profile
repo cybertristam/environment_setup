@@ -9,7 +9,7 @@ function add_to_path() {
 			newpath=${newpath}:${value}
 		fi
 	done
-	newpath=$(echo ${newpath}|sed 's/:://g')
+	newpath=$(echo ${newpath}|sed 's/\:\://g')
 	PATH=${newpath}:${PATH};export PATH
 }
 
