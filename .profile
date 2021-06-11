@@ -36,7 +36,9 @@ function source_functions() {
 
 function setup_java_env() {
 	set_env_var_dirs JAVA_HOME=/usr/java/latest
-	add_to_path ${JAVA_HOME}/bin
+	if [ -d ${JAVA_HOME} ]; then
+		add_to_path ${JAVA_HOME}/bin
+	fi
 }
 add_to_path ${HOME}/bin:/usr/local/bin:/usr/local/sbin
 
