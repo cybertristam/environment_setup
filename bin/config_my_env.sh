@@ -1,4 +1,4 @@
-i#!/bin/bash
+#!/bin/bash
 
 PATH=/bin:/usr/bin:/sbin:/usr/sbin;export PATH
 function log_it() {
