@@ -1,0 +1,56 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: example
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-tls
+  namespace: example
+data:
+  tls.crt: <base64_of_ingress_hostname_certificate>
+  tls.key: <base64_of_ingress_hostname_key>
+  ca.crt: <base64_of_ingress_hostname_certificate_certificate_authority>
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-ca-tls
+  namespace: example
+data:
+  ca.crt: <base64_of_ingress_hostname_certificate_certificate_authority>
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    # Enable client certificate authentication
+    nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
+    # Create the secret containing the trusted ca certificates
+    nginx.ingress.kubernetes.io/auth-tls-secret: "example/example-ca-tls"
+    # Specify the verification depth in the client certificates chain
+    nginx.ingress.kubernetes.io/auth-tls-verify-depth: "1"
+    # Specify an error page to be redirected to verification errors
+    # nginx.ingress.kubernetes.io/auth-tls-error-page: "http://www.mysite.com/error-cert.html"
+    # Specify if certificates are passed to upstream server
+    nginx.ingress.kubernetes.io/auth-tls-pass-certificate-to-upstream: "true"
+  name: nginx-test
+  namespace: example
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: service1.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - service1.example.com
+    secretName: example-tls
