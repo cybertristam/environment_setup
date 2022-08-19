@@ -15,7 +15,7 @@ function add_to_path() {
 
 function set_env_var_dirs() {
 	local values=$*
-	values=$(echo ${values}|sed 's/\:/ /g')
+	values=`echo ${values}|sed 's/\:/ /g'`
 	for value in ${values}; do
 		key=`echo ${values}|awk -F= '{print $1}'`
 		value_pair=`echo ${values}|awk -F= '{print $2}'`
