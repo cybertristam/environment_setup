@@ -48,7 +48,7 @@ UMASK="077";export UMASK
 
 source_functions ${HOME}/.aliases
 
-if [ -x /bin/docker ] && [ -s ${HOME}/.docker_aliases ]; then
+if [ -x /bin/docker ]; then
 	if [ "`systemctl is-active docker`" = "active" ]; then
 		source_functions ${HOME}/.docker_aliases
 		source_functions ${HOME}/.docker_functions
