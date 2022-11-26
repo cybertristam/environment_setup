@@ -7,3 +7,4 @@
     squash = "!git rebase -v -i $(git mainbranch)"
     publish = push origin HEAD --force-with-lease
     pub = publish
+    amend = commit --amend
