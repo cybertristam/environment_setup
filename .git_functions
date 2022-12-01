@@ -43,6 +43,11 @@ function parse_git_dirty {
     echo ""
   fi
 }
-
-export PS1="\[\e[36m\]\W\[\e[m\]\[\e[32m\]\`parse_git_branch\`\[\e[m\] $ "
-PS1="\[\e[37m\]\s-\v \u@\h:\[\e[m\]\w\[\e[32m\]\`parse_git_branch\`\[\e[m\]\$ ";export PS1
+which git 2> /dev/null
+if [ "$?" = "0" ]; then
+  export PS1="\[\e[36m\]\W\[\e[m\]\[\e[32m\]\`parse_git_branch\`\[\e[m\] $ "
+  PS1="\[\e[37m\]\s-\v \u@\h:\[\e[m\]\w\[\e[32m\]\`parse_git_branch\`\[\e[m\]\$ ";export PS1
+else
+  export PS1="\[\e[36m\]\W\[\e[m\]\[\e[m\] $ "
+  PS1="\[\e[37m\]\s-\v \u@\h:\[\e[m\]\w\[\e[m\] \$ ";export PS1
+fi
