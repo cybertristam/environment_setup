@@ -9,8 +9,10 @@ function add_to_path() {
 			newpath=${newpath}:${value}
 		fi
 	done
-	newpath=`echo ${newpath}|sed -r 's/\s+//g'|sed 's/:://g'`
-	PATH=${newpath}:${PATH};export PATH
+	if [ "${newpath}" != ":" ]; then
+		newpath=`echo ${newpath}|sed -r 's/\s+//g'|sed 's/:://g'`
+		PATH=${newpath}:${PATH};export PATH
+	fi
 }
 
 function set_env_var_dirs() {
