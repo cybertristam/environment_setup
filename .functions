@@ -21,5 +21,13 @@ function source_sshagentpid() {
 }
 
 function which() {
-	(alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+	if [ "`uname -s`" != "Darwin" ] ; then
+		(alias; declare -f) | /usr/bin/which --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+	else
+		if [ -s /opt/homebrew/bin/gwhich ];then
+			(alias; declare -f) | /opt/homebrew/bin/gwhich --tty-only --read-alias --read-functions --show-tilde --show-dot $@
+		else
+			which $@
+		fi
+	fi
 }

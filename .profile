@@ -59,4 +59,5 @@ if [ -x /bin/docker ] && [ -s ${HOME}/.docker_aliases ]; then
 fi
 source_functions ${HOME}/.functions
 add_to_path ${HOME}/.local/bin
+add_to_path /opt/homebrew/bin
 source_functions ${HOME}/.git_functions
