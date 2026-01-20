@@ -30,6 +30,8 @@ function honeyport_cmd() {
 function main() {
   if [ $(verify_running_as_root) -eq 0 ]; then
     honeyport_cmd
+  else
+    echo "Running as a non-root user"
   fi
 }
 
