@@ -11,6 +11,7 @@ function verify_running_as_root() {
     rtr_code=-1
   fi
   echo ${rtr_code}
+  exit ${rtr_code}
 }
 
 function honeyport_cmd() {
